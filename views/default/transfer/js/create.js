@@ -24,9 +24,9 @@ $scope.save = function () {
         });
     });
 
-    Sales.save({}, post, function (model) {
+    Transfer.save({}, post, function (model) {
         id = model.id;
-        $location.path('/sales/' + id);
+        $location.path('/transfer/view/' + id);
     }, function (r) {
         $scope.errors = {status: r.status, text: r.statusText, data: {}};
         if (r.status == 422) {

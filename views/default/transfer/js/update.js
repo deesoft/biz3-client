@@ -1,9 +1,15 @@
 
 $location = $injector.get('$location');
+$routeParams = $injector.get('$routeParams');
 
+$scope.paramId = $routeParams.id;
 // model
-$scope.model = {};
-$scope.model.items = [];
+Transfer.get({
+    id: $scope.paramId, 
+    expand: 'supplier,branch,items.product,items.uom'
+}, function (row) {
+    $scope.model = row;
+});
 
 // save Item
 $scope.save = function () {
@@ -23,14 +29,15 @@ $scope.save = function () {
             price:item.price,
         });
     });
-
-    Sales.save({}, post, function (model) {
+    
+    Transfer.update({id: $scope.paramId}, post, 
+    function (model) {
         id = model.id;
-        $location.path('/sales/' + id);
+        $location.path('/transfer/view/' + id);
     }, function (r) {
         $scope.errors = {status: r.status, text: r.statusText, data: {}};
         if (r.status == 422) {
-            for (var key in r.data) {
+            for (key in r.data) {
                 $scope.errors.data[r.data[key].field] = r.data[key].message;
             }
         }

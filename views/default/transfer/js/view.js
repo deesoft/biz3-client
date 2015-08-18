@@ -7,12 +7,13 @@ $scope.paramId = $routeParams.id;
 // model
 
 query = function () {
-    Sales.get({
+    Transfer.get({
         id: $scope.paramId,
-        expand: 'customer,branch,items.product,items.uom,movements.warehouse'
+        expand: 'branch,branchDest,items.product,items.uom,receives.warehouse,issues.warehouse'
     }, function (row) {
         $scope.model = row;
-        $scope.issues = row.movements;
+        $scope.receives = row.receives;
+        $scope.issues = row.issues;
     });
 };
 query();
@@ -20,7 +21,7 @@ query();
 // delete Item
 $scope.deleteModel = function () {
     if (confirm('Are you sure you want to delete')) {
-        Sales.remove({id: $scope.paramId}, {}, function () {
+        Transfer.remove({id: $scope.paramId}, {}, function () {
             window.history.back();
         });
     }
@@ -29,7 +30,7 @@ $scope.deleteModel = function () {
 // confirm
 $scope.confirm = function () {
     if (confirm('Are you sure you want to save')) {
-        Sales.patch({id: $scope.paramId}, [
+        Transfer.patch({id: $scope.paramId}, [
             {field: 'status', value: 20}
         ], function () {
             $route.reload();
@@ -42,7 +43,7 @@ $scope.confirm = function () {
 // confirm
 $scope.reject = function () {
     if (confirm('Are you sure you want to reject status')) {
-        Sales.patch({id: $scope.paramId}, [
+        Transfer.patch({id: $scope.paramId}, [
             {field: 'status', value: 10}
         ], function () {
             $route.reload();
@@ -52,7 +53,7 @@ $scope.reject = function () {
     }
 };
 
-$scope.deleteGI = function (item) {
+$scope.deleteGR = function (item) {
     if (confirm('Are you sure you want to delete')) {
         Movement.remove({id: item.id}, {}, function () {
             query();
@@ -62,7 +63,7 @@ $scope.deleteGI = function (item) {
     }
 }
 
-$scope.applyGI = function (item) {
+$scope.applyGR = function (item) {
     if (confirm('Are you sure you want to save')) {
         Movement.patch({id: item.id}, [
             {field: 'status', value: 20}
@@ -74,7 +75,7 @@ $scope.applyGI = function (item) {
     }
 }
 
-$scope.rejectGI = function (item) {
+$scope.rejectGR = function (item) {
     if (confirm('Are you sure you want to reject status')) {
         Movement.patch({id: item.id}, [
             {field: 'status', value: 10}

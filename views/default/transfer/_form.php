@@ -8,7 +8,7 @@ use dee\angular\Angular;
 $angular->renderJs('js/form.js');
 ?>
 
-<div class="sales-form">
+<div class="transfer-form">
     <form name="Form" d-errors="errors">
         <div class="box box-default">
             <div class="box-header with-border">
@@ -27,14 +27,14 @@ $angular->renderJs('js/form.js');
                 <div class="row">
                     <div class="col-xs-6">
                         <div class="form-group required" ng-class="{error:errors.supplier_id}">
-                            <label for="sales-supplier_id" class="control-label">Supplier</label>
-                            <input id="sales-supplier_id" name="supplier_id" class="form-control" ng-model="model.supplier"
+                            <label for="transfer-supplier_id" class="control-label">Supplier</label>
+                            <input id="transfer-supplier_id" name="supplier_id" class="form-control" ng-model="model.supplier"
                                    typeahead="supplier as supplier.name for supplier in suppliers.asArray() | filter:$viewValue | limitTo:8">
                             <div class="help-block">{{errors.supplier_id}}</div>
                         </div>
                         <div class="form-group required" ng-class="{error:errors.branch_id}">
-                            <label for="sales-branch_id" class="control-label">Branch</label>
-                            <select id="sales-branch_id" name="branch_id" class="form-control" ng-model="model.branch_id"
+                            <label for="transfer-branch_id" class="control-label">Branch</label>
+                            <select id="transfer-branch_id" name="branch_id" class="form-control" ng-model="model.branch_id"
                                     ng-options="branch.id as branch.name for branch in branchs.asArray()">
                             </select>
                             <div class="help-block">{{errors.branch_id}}</div>
@@ -42,9 +42,9 @@ $angular->renderJs('js/form.js');
                     </div>
                     <div class="col-xs-6">
                         <div class="form-group required" ng-class="{error:errors.date}">
-                            <label for="sales-date" class="control-label">Date</label>
+                            <label for="transfer-date" class="control-label">Date</label>
                             <p class="input-group" style="width: 50%;">
-                                <input id="sales-date" name="date" type="text" class="form-control"
+                                <input id="transfer-date" name="date" type="text" class="form-control"
                                        ng-model="model.date" datepicker-popup="dd-MM-yyyy"
                                        is-open="dt.opened" datepicker-options="{}"
                                        ng-focus="dt.open($event)" close-text="Close" />
@@ -55,8 +55,8 @@ $angular->renderJs('js/form.js');
                             <div class="help-block">{{errors.date}}</div>
                         </div>
                         <div class="form-group" ng-class="{error:errors.discount}">
-                            <label for="sales-discount" class="control-label">Discount</label>
-                            <input id="sales-discount" name="discount" class="form-control" ng-model="model.discount">
+                            <label for="transfer-discount" class="control-label">Discount</label>
+                            <input id="transfer-discount" name="discount" class="form-control" ng-model="model.discount">
                             <div class="help-block">{{errors.discount}}</div>
                         </div>
                     </div>

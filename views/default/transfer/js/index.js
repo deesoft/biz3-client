@@ -2,10 +2,10 @@ var $location = $injector.get('$location');
 var search = $location.search();
 
 query = function () {
-    Sales.query({
+    Transfer.query({
         page: search.page,
         sort: search.sort,
-        expand: 'customer,branch',
+        expand: 'branch,branchDest',
     }, function (rows, headerCallback) {
         yii.angular.getPageInfo($scope.provider, headerCallback);
         $scope.rows = rows;
@@ -29,7 +29,7 @@ $scope.provider = {
 $scope.deleteModel = function (model) {
     if (confirm('Are you sure you want to delete')) {
         id = model.id;
-        Sales.remove({id: id}, {}, function () {
+        Transfer.remove({id: id}, {}, function () {
             query();
         });
     }

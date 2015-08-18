@@ -10,10 +10,10 @@ $angular->renderJs('js/index.js');
 $angular->requires(['dee.angular']);
 ?>
 
-<div class="sales-index">
+<div class="transfer-index">
     <h1><?= Html::encode($this->title) ?></h1>
     <p>
-        <?= Html::a('Create', '#/sales/new', ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create', '#/transfer/new', ['class' => 'btn btn-success']) ?>
     </p>
 
     <div class="grid-view">
@@ -23,11 +23,10 @@ $angular->requires(['dee.angular']);
                     <th >#</th>
                     <th><a href sort-field="id" >Id</a></th>
                     <th><a href sort-field="number">Number</a></th>
-                    <th><a href sort-field="customer_id" >Customer</a></th>
                     <th><a href sort-field="branch_id" >Branch</a></th>
+                    <th><a href sort-field="branch_dest_id" >Branch Dest</a></th>
                     <th><a href sort-field="date" >Date</a></th>
                     <th><a href sort-field="value">Value</a></th>
-                    <th><a href sort-field="discount">Discount</a></th>
                     <th><a href sort-field="status">Status</a></th>
                     <!--
                         <th><a href sort-field="created_at">Created_at</a></th>
@@ -43,11 +42,10 @@ $angular->requires(['dee.angular']);
                     <td>{{(provider.page - 1) * provider.itemPerPage + no + 1}}</td>
                     <td>{{model.id}}</td>
                     <td>{{model.number}}</td>
-                    <td>{{model.customer.name}}</td>
                     <td>{{model.branch.name}}</td>
+                    <td>{{model.branchDest.name}}</td>
                     <td>{{model.date | date:'dd-MM-yyyy'}}</td>
                     <td>{{model.value}}</td>
-                    <td>{{model.discount}}</td>
                     <td>{{model.nmStatus}}</td>
                     <!--
                         <td>{{model.created_at}}</td>
@@ -56,8 +54,8 @@ $angular->requires(['dee.angular']);
                         <td>{{model.updated_by}}</td>
                     -->
                     <td>
-                        <a ng-href="#/sales/{{model.id}}"><span class="glyphicon glyphicon-eye-open"></span></a>
-                        <a ng-href="#/sales/{{model.id}}/edit" ng-if="model.status == 10"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a ng-href="#/transfer/{{model.id}}"><span class="glyphicon glyphicon-eye-open"></span></a>
+                        <a ng-href="#/transfer/{{model.id}}/edit" ng-if="model.status == 10"><span class="glyphicon glyphicon-pencil"></span></a>
                         <a href ng-click="deleteModel(model)" ng-if="model.status == 10"><span class="glyphicon glyphicon-trash"></span></a>
                     </td>
                 </tr>
